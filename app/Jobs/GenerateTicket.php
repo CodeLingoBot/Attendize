@@ -87,8 +87,5 @@ class GenerateTicket extends Job implements ShouldQueue
 
     }
 
-    private function isAttendeeTicket()
-    {
-        return ($this->attendee_reference_index != null);
-    }
+    
 }

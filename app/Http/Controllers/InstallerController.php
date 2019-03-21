@@ -235,27 +235,5 @@ class InstallerController extends Controller
         return redirect()->route('showSignup', ['first_run' => 'yup']);
     }
 
-    private function testDatabase($database)
-    {
-        Config::set('database.default', $database['type']);
-        Config::set("database.connections.{$database['type']}.host", $database['host']);
-        Config::set("database.connections.{$database['type']}.database", $database['name']);
-        Config::set("database.connections.{$database['type']}.username", $database['username']);
-        Config::set("database.connections.{$database['type']}.password", $database['password']);
-
-        $databaseConnectionValid = FALSE;
-
-        try {
-            DB::reconnect();
-            $pdo = DB::connection()->getPdo();
-            if(!empty($pdo)) {
-                $databaseConnectionValid = TRUE;
-            }
-
-        } catch (\Exception $e) {
-            Log::error('Database connection details invalid' . $e->getMessage());
-        }
-
-        return $databaseConnectionValid;
-    }
+    
 }
